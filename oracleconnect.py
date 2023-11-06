@@ -1,3 +1,4 @@
+import os
 import streamlit as st
 import oracledb
 import pandas as pd
@@ -8,12 +9,17 @@ blue_start = "\033[34m"
 blue_end = "\033[0m"
 current_time = datetime.datetime.now().strftime("%H:%M:%S")
 
+
+
+
+secret_value = 
+
 # Establishing credential
-user = "AGUILLOU"
-password = "SQLPyth0n0r@cle"
-host = "172.18.237.37"
+user = os.environ['USER_NAME']
+password = os.environ['PASSWORD']
+host = os.environ['ADDRESS_IP']
 port = "1521"
-service_name = "ODH"
+service_name = os.environ['SID']
 
 
 ''
