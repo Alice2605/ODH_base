@@ -1,21 +1,11 @@
 import streamlit as st
 #Configuration de la page
-st.set_page_config(layout="wide")
+st.set_page_config(layout="wide", page_title="Sankey Diagram")
 
 import pandas as pd
-import numpy as np
-import time 
-import matplotlib.pyplot as plt
-import plotly.express as px
 from functions import *
 from oracleconnect import *
 from donnees import *
-import datetime
-import sys
-import time
-
-
-
 
 
 
@@ -34,32 +24,27 @@ class bcolors:
 
 
 
-st.markdown(f"<h1 style='text-align: center;'>My first app</h1>", unsafe_allow_html=True)
+
+
+
+st.markdown(f"<h1 style='text-align: center;'>Diagrammes de Sankey ODH, médicaments injectables par protocole</h1>", unsafe_allow_html=True)
 
 st.write("""
-Hello *world!*
+*Voici le début de la table :*
 """)
 
-
-st.write(df_trastuzumab.head())
-#st.line_chart(df)
+st.write(df_trastuzumab_cgfl.head()) # Affiche les 5 premières lignes de la table
 
 
 
-fig.update_layout(title_text="Diagramme Sankey de Trastuzumab", 
-                  title_font_size=30, 
-                  title_x=0.5,
+# CGFL
+fig_cgfl_sankey.update_layout(title_text="Patients ayant reçu du trastuzumab au CGFL", 
+                  title_font_size=30,
                   width=1700  # Largeur du graphique
                   ) # Change la taille de police du TITRE
-fig.update_traces(textfont_size=12) # Change la taille de police du texte des NOEUDS
+fig_cgfl_sankey.update_traces(textfont_size=12) # Change la taille de police du texte des NOEUDS
 
 
-st.plotly_chart(fig)
-
-
-
-
-
-
+st.plotly_chart(fig_cgfl_sankey)
 
 
