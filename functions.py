@@ -1,30 +1,15 @@
-import streamlit as st
 import pandas as pd
 import seaborn as sns
 import plotly.graph_objects as go
 import datetime
-
-
-
-def calctime(start_time,end_time):
-    return(end_time-start_time)
-def greentext(text):
-    current_time = datetime.datetime.now().strftime("%H:%M:%S")
-    print("["+current_time+"]" "\033[32m" + text + "\033[0m")
-def bluetext(text):
-    current_time = datetime.datetime.now().strftime("%H:%M:%S")
-    print("["+current_time+"]"+blue_start+ text +blue_end)
-
-
-    
-
+   
 
 
 
 ###############################################################################################################################################
 
 def df_to_df_trastuzumab(df):
-    #%% Regroupe chaque num de protocole d'un patient en une ligne (même protocole)
+    # Regroupe chaque num de protocole d'un patient en une ligne (même protocole)
 
     df_trastuzumab = pd.DataFrame()
     nouvelles_lignes = []
@@ -53,7 +38,7 @@ def df_to_df_trastuzumab(df):
 
 
 
-    #%% Regroupe les lignes identiques et rajoute une colonne pour leur nombre d'occurrence
+    # Regroupe les lignes identiques et rajoute une colonne pour leur nombre d'occurrence
 
     """Rajoute nombre d'occurrences des lignes et les regroupe"""
 
@@ -85,7 +70,7 @@ def df_to_df_trastuzumab(df):
 
 def donnees_diagram(df_trastuzumab):
 
-    #%% Nombre de protocoles différents
+    # Nombre de protocoles différents
 
     # Crée liste vide pour stocker les valeurs uniques de protocoles
     unique_protocoles = []
@@ -106,7 +91,7 @@ def donnees_diagram(df_trastuzumab):
 
 
 
-    #%% Couleurs
+    # Couleurs
 
     color_palette = sns.color_palette('husl', num_protocoles)
 
@@ -115,7 +100,7 @@ def donnees_diagram(df_trastuzumab):
 
 
 
-    #%% Données pour le Sankey diagramme
+    # Données pour le Sankey diagramme
 
     colonnes = df_trastuzumab.columns.tolist()
 
@@ -159,7 +144,7 @@ def donnees_diagram(df_trastuzumab):
 
 
 def cree_sankey(labels_reel, label_color, links):
-    #%% Crée le diagramme Sankey
+    # Crée le diagramme Sankey
     fig = go.Figure(
         data=[
             go.Sankey(
@@ -181,5 +166,6 @@ def cree_sankey(labels_reel, label_color, links):
         ]
     )
     return fig
+
 
 
