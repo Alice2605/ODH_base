@@ -8,13 +8,6 @@ blue_start = "\033[34m"
 blue_end = "\033[0m"
 current_time = datetime.datetime.now().strftime("%H:%M:%S")
 
-# Establishing credential
-user = "AGUILLOU"
-password = "SQLPyth0n0r@cle"
-host = "172.18.237.37"
-port = "1521"
-service_name = "ODH"
-
 
 ''
 # Creating the DSN
