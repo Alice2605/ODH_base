@@ -44,6 +44,7 @@ fig_cgfl_sankey.update_layout(title_text="Patients ayant reçu du trastuzumab au
                   ) # Change la taille de police du TITRE
 fig_cgfl_sankey.update_traces(textfont_size=12) # Change la taille de police du texte des NOEUDS
 
+#fig_cgfl_sankey.write_html('sankey_graph.html') # save graph in an html file
 
 st.plotly_chart(fig_cgfl_sankey)
 
