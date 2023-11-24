@@ -11,7 +11,11 @@ current_time = datetime.datetime.now().strftime("%H:%M:%S")
 
 ''
 # Creating the DSN
-dsn = oracledb.ConnectParams(host=st.secrets.host, port=st.secrets.port, service_name=st.secrets.service_name)
+#dsn = oracledb.ConnectParams(host=st.secrets.host, port=st.secrets.port, service_name=st.secrets.service_name)
+
+dsn = """(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=st.secrets.host)(PORT=st.secrets.port))
+          (CONNECT_DATA=(SERVICE_NAME=st.secrets.service_name)))"""
+
 print("["+current_time+"]"+blue_start+ " Got DSN !"+blue_end)
 print("["+current_time+"]"+blue_start+ " Trying to connect on server "+ st.secrets.host +blue_end)
 start_time = datetime.datetime.now()
