@@ -20,7 +20,7 @@ print("["+current_time+"]"+blue_start+ " Got DSN !"+blue_end)
 print("["+current_time+"]"+blue_start+ " Trying to connect on server "+ st.secrets.host +blue_end)
 start_time = datetime.datetime.now()
 
-
+connection = oracledb.connect(user=st.secrets.user, password=st.secrets.password, dsn=dsn)
 # Connection to the database
 try:
     print("["+current_time+"]"+blue_start+" Establishing connection...."+blue_end)
