@@ -33,7 +33,7 @@ end_time = datetime.datetime.now()
 # Function to execute queries
 @st.cache_data
 def searchtodf(QUERRY):
-    #cursor = connection.cursor()
+    cursor = connection.cursor()
     cursor.execute(QUERRY)
     result = cursor.fetchall()
     columns = [desc[0] for desc in cursor.description]
