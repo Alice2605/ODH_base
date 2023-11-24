@@ -1,5 +1,5 @@
 import streamlit as st
-import cx_Oracle
+import oracledb
 import pandas as pd
 import datetime
 from functions import *
@@ -11,7 +11,7 @@ current_time = datetime.datetime.now().strftime("%H:%M:%S")
 
 ''
 # Creating the DSN
-dsn = cx_Oracle.makedsn(host=st.secrets.host, port=st.secrets.port, service_name=st.secrets.service_name)
+dsn = oracledb.ConnectParams(host=st.secrets.host, port=st.secrets.port, service_name=st.secrets.service_name)
 print("["+current_time+"]"+blue_start+ " Got DSN !"+blue_end)
 print("["+current_time+"]"+blue_start+ " Trying to connect on server "+ st.secrets.host +blue_end)
 start_time = datetime.datetime.now()
@@ -20,12 +20,12 @@ start_time = datetime.datetime.now()
 # Connection to the database
 try:
     print("["+current_time+"]"+blue_start+" Establishing connection...."+blue_end)
-    connection = cx_Oracle.connect(user=st.secrets.user, password=st.secrets.password, params=dsn)
+    connection = oracledb.connect(user=st.secrets.user, password=st.secrets.password, dsn=dsn)
     print(f'[{current_time}] ......')
     cursor = connection.cursor()
     print("["+current_time+"]" "\033[32m" + " Connection successfully established to server " + st.secrets.host+ " With user : "+st.secrets.user+ "\033[0m")
 
-except cx_Oracle.DatabaseError as e:
+except oracledb.DatabaseError as e:
     print(f"[{current_time}] Connection error:", e)
 
 end_time = datetime.datetime.now()
