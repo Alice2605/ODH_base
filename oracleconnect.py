@@ -31,7 +31,7 @@ except cx_Oracle.DatabaseError as e:
 end_time = datetime.datetime.now()
 
 # Function to execute queries
-@st.cache_data
+#@st.cache_data
 def searchtodf(QUERRY):
     cursor = connection.cursor()
     cursor.execute(QUERRY)
