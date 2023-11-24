@@ -1,11 +1,13 @@
+import streamlit as st
 import plotly.express as px
 from functions import *
-from oracleconnect import *
+#from oracleconnect import *
 import numpy as np
 
+conn = st.connection('mysql', type='sql)
 
 # Données
-df_cgfl = searchtodf("""
+df_cgfl = conn.query("""
 				SELECT IDPATIENT, IDHOPITAL, DT1DATEADMP, PRODUIT1, SUB_NUM_PROTO, PROTO
 				FROM ODH_SEIN
 				WHERE IDHOPITAL = 210987731 AND IDPATIENT IN (SELECT DISTINCT IDPATIENT FROM ODH_SEIN WHERE PRODUIT1 = 'trastuzumab' OR
