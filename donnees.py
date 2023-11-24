@@ -7,13 +7,7 @@ import numpy as np
 conn = st.connection('mysql', type='sql)
 
 # Données
-df_cgfl = conn.query("""
-				SELECT IDPATIENT, IDHOPITAL, DT1DATEADMP, PRODUIT1, SUB_NUM_PROTO, PROTO
-				FROM ODH_SEIN
-				WHERE IDHOPITAL = 210987731 AND IDPATIENT IN (SELECT DISTINCT IDPATIENT FROM ODH_SEIN WHERE PRODUIT1 = 'trastuzumab' OR
-                    PRODUIT1 = 'trastuzumab emtansine' OR PRODUIT1 = 'trastuzumab duocarmazine' OR PRODUIT1 = 'trastuzumab deruxtecan')
-                ORDER BY IDPATIENT ASC, DT1DATEADMP ASC
-                """)
+df_cgfl = conn.query("""SELECT IDPATIENT, IDHOPITAL, DT1DATEADMP, PRODUIT1, SUB_NUM_PROTO, PROTO FROM ODH_SEIN WHERE IDHOPITAL = 210987731 AND IDPATIENT IN (SELECT DISTINCT IDPATIENT FROM ODH_SEIN WHERE PRODUIT1 = 'trastuzumab' OR PRODUIT1 = 'trastuzumab emtansine' OR PRODUIT1 = 'trastuzumab duocarmazine' OR PRODUIT1 = 'trastuzumab deruxtecan') ORDER BY IDPATIENT ASC, DT1DATEADMP ASC""")
 
 df_trastuzumab_cgfl = df_to_df_trastuzumab(df_cgfl) # Crée la table avec les lignes de protocoles et leur fréquence
 
