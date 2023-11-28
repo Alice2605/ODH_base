@@ -15,7 +15,7 @@ current_time = datetime.datetime.now().strftime("%H:%M:%S")
 #dsn = oracledb.ConnectParams(host=st.secrets.host, port=st.secrets.port, service_name=st.secrets.service_name)
 
 # Récupération de l'adresse IP du serveur Oracle via le VPN
-vpn_ip = pyroute2.IPRoute().link_lookup(ifname="tun1")[0].attrs["IFA_ADDRESS"]
+vpn_ip = pyroute2.IPRoute().link_lookup(ifname="en0")[0].attrs["IFA_ADDRESS"]
 
 dsn = """(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST={})(PORT=1521))
           (CONNECT_DATA=(SERVICE_NAME="ODH")))""".format(vpn_ip)
