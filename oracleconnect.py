@@ -3,6 +3,7 @@ import oracledb
 import pandas as pd
 import datetime
 from functions import *
+import pyroute2
 #import toml
 blue_start = "\033[34m"
 blue_end = "\033[0m"
@@ -13,8 +14,11 @@ current_time = datetime.datetime.now().strftime("%H:%M:%S")
 # Creating the DSN
 #dsn = oracledb.ConnectParams(host=st.secrets.host, port=st.secrets.port, service_name=st.secrets.service_name)
 
-dsn = """(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST="172.18.237.37")(PORT=1521))
-          (CONNECT_DATA=(SERVICE_NAME="ODH")))"""
+# Récupération de l'adresse IP du serveur Oracle via le VPN
+vpn_ip = pyroute2.IPRoute().link_lookup(ifname="tun0")[0].attrs["IFA_ADDRESS"]
+
+dsn = """(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST={})(PORT=1521))
+          (CONNECT_DATA=(SERVICE_NAME="ODH")))""".format(vpn_ip)
 
 print("["+current_time+"]"+blue_start+ " Got DSN !"+blue_end)
 print("["+current_time+"]"+blue_start+ " Trying to connect on server "+ st.secrets.host +blue_end)
